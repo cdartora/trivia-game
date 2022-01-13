@@ -12,12 +12,23 @@ export class Login extends Component {
     };
 
     this.handleChange = this.handleChange.bind(this);
+    this.validateButton = this.validateButton.bind(this);
   }
 
   handleChange(event) {
     this.setState({
       [event.target.name]: event.target.value,
     });
+  }
+
+  validateButton() {
+    const { email, name } = this.state;
+    const MIN_LENGTH = 1;
+
+    if (email.length >= MIN_LENGTH && name.length >= MIN_LENGTH) {
+      return false;
+    }
+    return true;
   }
 
   render() {
@@ -47,6 +58,7 @@ export class Login extends Component {
         <button
           type="submit"
           data-testid="btn-play"
+          disabled={ this.validateButton() }
         >
           Play
         </button>
