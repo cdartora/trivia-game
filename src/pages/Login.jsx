@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-// import PropTypes from 'prop-types';
+import { userLoginn } from '../Redux/Actions/actionLogin';
+import { saveEmailHeader, saveUser } from '../Redux/Actions/actionPlayer';
 
 export class Login extends Component {
   constructor() {
@@ -13,6 +15,7 @@ export class Login extends Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.validateButton = this.validateButton.bind(this);
+    this.clickButton = this.clickButton.bind(this);
   }
 
   handleChange(event) {
@@ -29,6 +32,23 @@ export class Login extends Component {
       return false;
     }
     return true;
+  }
+
+  clickButton(e) {
+    e.preventDefault();
+
+    const { name, email } = this.state;
+    const { history, saveName, saveEmail, saveHeaderEmail } = this.props;
+    saveEmail(email);
+    saveHeaderEmail(email);
+    saveName(name);
+
+    // this.setState({
+    //   email: '',
+    //   name: '',
+    // });
+
+    history.push('player');
   }
 
   render() {
@@ -59,6 +79,7 @@ export class Login extends Component {
           type="submit"
           data-testid="btn-play"
           disabled={ this.validateButton() }
+          onClick={ this.clickButton }
         >
           Play
         </button>
@@ -67,9 +88,24 @@ export class Login extends Component {
   }
 }
 
+Login.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
+  saveName: PropTypes.func.isRequired,
+  saveEmail: PropTypes.func.isRequired,
+  saveHeaderEmail: PropTypes.func.isRequired,
+};
+
 const mapStateToProps = (state) => ({
-  email: state.email,
-  gravatarEmail: state.gravatarEmail,
+  email: state.user.email,
+  gravatarEmail: state.player.gravatarEmail,
 });
 
-export default connect(mapStateToProps)(Login);
+const mapDispatchToProps = (dispatch) => ({
+  saveEmail: (email) => (dispatch(userLoginn(email))),
+  saveName: (UserName) => (dispatch(saveUser(UserName))),
+  saveHeaderEmail: (email) => (dispatch(saveEmailHeader(email))),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

@@ -1,4 +1,4 @@
-import { SAVE_EMAIL } from '../Actions/actionPlayer';
+import { SAVE_EMAIL, SAVE_USER } from '../Actions/actionPlayer';
 
 const INITIAL_STATE_PLAYER = {
   name: '',
@@ -13,6 +13,11 @@ const playerReducer = (state = INITIAL_STATE_PLAYER, action) => {
     return {
       ...state,
       gravatarEmail: state.gravatarEmail,
+    };
+  case SAVE_USER:
+    return {
+      ...state,
+      name: action.name,
     };
   default:
     return state;
