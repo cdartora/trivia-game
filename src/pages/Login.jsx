@@ -8,7 +8,7 @@ export class Login extends Component {
 
     this.state = {
       email: '',
-      password: '',
+      name: '',
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -21,11 +21,22 @@ export class Login extends Component {
   }
 
   render() {
-    const { email, password } = this.state;
+    const { email, name } = this.state;
     return (
       <form>
+        <label htmlFor="name">
+          <input
+            data-testid="input-player-name"
+            type="name"
+            name="name"
+            value={ name }
+            onChange={ this.handleChange }
+            placeholder="Insira seu name de Usuario"
+          />
+        </label>
         <label htmlFor="email">
           <input
+            data-testid="input-gravatar-email"
             type="email"
             name="email"
             value={ email }
@@ -33,16 +44,10 @@ export class Login extends Component {
             placeholder="Insira seu email"
           />
         </label>
-        <label htmlFor="password">
-          <input
-            type="password"
-            name="password"
-            value={ password }
-            onChange={ this.handleChange }
-            placeholder="Insira sua senha"
-          />
-        </label>
-        <button type="submit">
+        <button
+          type="submit"
+          data-testid="btn-play"
+        >
           Play
         </button>
       </form>
@@ -52,6 +57,7 @@ export class Login extends Component {
 
 const mapStateToProps = (state) => ({
   email: state.email,
+  gravatarEmail: state.gravatarEmail,
 });
 
 export default connect(mapStateToProps)(Login);
