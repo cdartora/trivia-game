@@ -1,4 +1,4 @@
-import { SAVE_EMAIL, SAVE_USER } from '../Actions/actionPlayer';
+import { SAVE_EMAIL, SAVE_USER } from '../actions/actionPlayer';
 
 const INITIAL_STATE_PLAYER = {
   name: '',

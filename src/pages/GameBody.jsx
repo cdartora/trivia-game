@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Header } from '../components/Header';
 
-export class GambeBody extends Component {
+export class GameBody extends Component {
   render() {
     return (
       <div>
@@ -21,4 +21,4 @@ const mapStateToProps = (state) => ({
 
 // };
 
-export default connect(mapStateToProps)(GambeBody);
+export default connect(mapStateToProps)(GameBody);
