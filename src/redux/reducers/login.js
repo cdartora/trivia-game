@@ -2,6 +2,7 @@ import { LOGIN } from '../actions/actionLogin';
 
 const INITIAL_STATE = {
   email: '',
+  token: '',
 };
 
 const userReducer = (state = INITIAL_STATE, action) => {
@@ -10,6 +11,7 @@ const userReducer = (state = INITIAL_STATE, action) => {
     return {
       ...state,
       email: action.email,
+      token: action.token,
     };
   default:
     return state;

@@ -14,7 +14,7 @@ export class GameBody extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  email: state.user.email,
+  email: state.email,
 });
 
 // const mapDispatchToProps = {
