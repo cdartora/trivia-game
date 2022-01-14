@@ -1,3 +1,4 @@
+import fetchQuestions from '../helpers/fetchQuestions';
 import fetchToken from '../helpers/fetchToken';
 import saveToken from '../helpers/saveToken';
 
@@ -25,6 +26,7 @@ export const loginHandler = (email) => (dispatch) => {
     (data) => {
       dispatch(userLogin(email));
       dispatch(getRequestToken(data.token));
+      fetchQuestions(data.token).then((questions) => console.log(questions.results));
     },
   );
 };
