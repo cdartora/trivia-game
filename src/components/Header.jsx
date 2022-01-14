@@ -19,21 +19,21 @@ export class Header extends Component {
   }
 
   render() {
-    const { userName, playerScore } = this.props;
+    const { name, score } = this.props;
     return (
       <header className="header-container">
         <img
           src={ this.hashGenerator() }
-          alt={ `${userName} Avatar` }
+          alt={ `${name} Avatar` }
           className="avatar"
           data-testid="header-profile-picture"
         />
         <div className="header-info">
           <strong data-testid="header-player-name">
-            { userName }
+            { name }
           </strong>
           <span data-testid="header-score">
-            { playerScore }
+            { score }
           </span>
         </div>
       </header>
@@ -41,20 +41,14 @@ export class Header extends Component {
   }
 }
 
-Header.propTypes = {
-  email: PropTypes.string.isRequired,
-  userName: PropTypes.string.isRequired,
-  playerScore: PropTypes.number.isRequired,
-};
-
-const mapStateToProps = (state) => ({
-  email: state.user.email,
-  userName: state.player.name,
-  playerScore: state.player.score,
-});
-
 // const mapDispatchToProps = {
 
 // }
 
-export default connect(mapStateToProps)(Header);
+export default connect(null)(Header);
+
+Header.propTypes = {
+  email: PropTypes.string.isRequired,
+  score: PropTypes.number.isRequired,
+  name: PropTypes.string.isRequired,
+};
