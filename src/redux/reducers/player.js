@@ -12,7 +12,7 @@ const playerReducer = (state = INITIAL_STATE_PLAYER, action) => {
   case SAVE_EMAIL:
     return {
       ...state,
-      gravatarEmail: state.gravatarEmail,
+      gravatarEmail: action.gravatarEmail,
     };
   case SAVE_USER:
     return {

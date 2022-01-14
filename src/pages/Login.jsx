@@ -46,10 +46,10 @@ export class Login extends Component {
     saveHeaderEmail(email);
     saveName(name);
 
-    // this.setState({
-    //   email: '',
-    //   name: '',
-    // });
+    this.setState({
+      email: '',
+      name: '',
+    });
 
     history.push('player');
   }
@@ -132,7 +132,9 @@ Login.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  email: state.email,
+  email: state.user.email,
+  score: state.player.score,
+  name: state.player.name,
   // gravatarEmail: state.player.gravatarEmail,
 });
 

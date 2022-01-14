@@ -7,7 +7,7 @@ export const saveEmailHeader = (gravatarEmail) => ({
 
 export const SAVE_USER = 'SAVE_USER';
 
-export const saveUser = (Username) => ({
+export const saveUser = (name) => ({
   type: SAVE_USER,
-  Username,
+  name,
 });
