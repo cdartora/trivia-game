@@ -11,11 +11,13 @@ export class Login extends Component {
     this.state = {
       email: '',
       name: '',
+      isSettingsOpen: false,
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.validateButton = this.validateButton.bind(this);
     this.clickButton = this.clickButton.bind(this);
+    this.handleSettings = this.handleSettings.bind(this);
   }
 
   handleChange(event) {
@@ -51,8 +53,14 @@ export class Login extends Component {
     history.push('player');
   }
 
+  handleSettings() {
+    this.setState({
+      isSettingsOpen: true,
+    });
+  }
+
   render() {
-    const { email, name } = this.state;
+    const { email, name, isSettingsOpen } = this.state;
     return (
       <div>
         <form>
@@ -84,6 +92,20 @@ export class Login extends Component {
           >
             Play
           </button>
+
+          {
+            isSettingsOpen ? (
+              <p data-testid="settings-title">Configurações</p>
+            ) : (
+              <button
+                type="button"
+                data-testid="btn-settings"
+                onClick={ this.handleSettings }
+              >
+                Configurações
+              </button>
+            )
+          }
         </form>
       </div>
     );
