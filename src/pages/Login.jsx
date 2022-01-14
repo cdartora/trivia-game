@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { userLoginn } from '../redux/actions/actionLogin';
+import { loginHandler } from '../redux/actions/actionLogin';
 import { saveEmailHeader, saveUser } from '../redux/actions/actionPlayer';
 
 export class Login extends Component {
@@ -98,12 +98,12 @@ Login.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  email: state.user.email,
-  gravatarEmail: state.player.gravatarEmail,
+  email: state.email,
+  // gravatarEmail: state.player.gravatarEmail,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  saveEmail: (email) => (dispatch(userLoginn(email))),
+  saveEmail: (email) => (dispatch(loginHandler(email))),
   saveName: (UserName) => (dispatch(saveUser(UserName))),
   saveHeaderEmail: (email) => (dispatch(saveEmailHeader(email))),
 });
