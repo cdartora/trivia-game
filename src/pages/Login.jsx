@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { loginHandler } from '../redux/actions/actionLogin';
 import { saveEmailHeader, saveUser } from '../redux/actions/actionPlayer';
+import './login.css';
 
 export class Login extends Component {
   constructor() {
@@ -62,26 +63,28 @@ export class Login extends Component {
   render() {
     const { email, name, isSettingsOpen } = this.state;
     return (
-      <div>
-        <form>
-          <label htmlFor="name">
+      <div className="login-container">
+        <form className="login-form">
+          <h1>Trivia</h1>
+          <h2>Login</h2>
+          <label className="login-input" htmlFor="name">
             <input
               data-testid="input-player-name"
               type="name"
               name="name"
               value={ name }
               onChange={ this.handleChange }
-              placeholder="Insira seu name de Usuario"
+              placeholder="Nome"
             />
           </label>
-          <label htmlFor="email">
+          <label className="login-input" htmlFor="email">
             <input
               data-testid="input-gravatar-email"
               type="email"
               name="email"
               value={ email }
               onChange={ this.handleChange }
-              placeholder="Insira seu email"
+              placeholder="E-mail"
             />
           </label>
           <button
@@ -89,18 +92,27 @@ export class Login extends Component {
             data-testid="btn-play"
             disabled={ this.validateButton() }
             onClick={ this.clickButton }
+            className="login-play-button"
           >
             Play
           </button>
 
           {
             isSettingsOpen ? (
-              <p data-testid="settings-title">Configurações</p>
+              <p
+                className="login-settings-menu"
+                data-testid="settings-title"
+              >
+                Configurações
+
+              </p>
             ) : (
               <button
                 type="button"
                 data-testid="btn-settings"
                 onClick={ this.handleSettings }
+                className="login-settings-button"
+
               >
                 Configurações
               </button>
