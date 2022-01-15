@@ -1,4 +1,5 @@
 import { SAVE_EMAIL, SAVE_USER } from '../actions/actionPlayer';
+import { QUESTIONS } from '../actions/actionLogin';
 
 const INITIAL_STATE_PLAYER = {
   name: '',
@@ -18,6 +19,11 @@ const playerReducer = (state = INITIAL_STATE_PLAYER, action) => {
     return {
       ...state,
       name: action.name,
+    };
+  case QUESTIONS:
+    return {
+      ...state,
+      questions: action.questions,
     };
   default:
     return state;

@@ -22,20 +22,21 @@ export class Header extends Component {
     const { name, score } = this.props;
     return (
       <header className="header-container">
-        <img
-          src={ this.hashGenerator() }
-          alt={ `${name} Avatar` }
-          className="avatar"
-          data-testid="header-profile-picture"
-        />
         <div className="header-info">
-          <strong data-testid="header-player-name">
+          <img
+            src={ this.hashGenerator() }
+            alt={ `${name} Avatar` }
+            className="avatar"
+            data-testid="header-profile-picture"
+          />
+          <strong data-testid="header-player-name" className="header-name">
             { name }
           </strong>
-          <span data-testid="header-score">
-            { score }
-          </span>
         </div>
+
+        <span className="header-score" data-testid="header-score">
+          { score }
+        </span>
       </header>
     );
   }

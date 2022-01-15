@@ -21,12 +21,23 @@ export const getRequestToken = (token) => {
   };
 };
 
+export const QUESTIONS = 'QUESTIONS';
+
+export const saveQuestions = (questions) => ({
+  type: QUESTIONS,
+  questions,
+});
+
 export const loginHandler = (email) => (dispatch) => {
-  fetchToken().then(
-    (data) => {
-      dispatch(userLogin(email));
-      dispatch(getRequestToken(data.token));
-      fetchQuestions(data.token).then((questions) => console.log(questions.results));
-    },
-  );
+  fetchToken()
+    .then(
+      ({ token }) => {
+        dispatch(userLogin(email));
+        dispatch(getRequestToken(token));
+        fetchQuestions(token)
+          .then((questions) => {
+            dispatch(saveQuestions(questions.results));
+          });
+      },
+    );
 };
