@@ -1,4 +1,4 @@
-import { SAVE_EMAIL, SAVE_USER } from '../actions/actionPlayer';
+import { SAVE_EMAIL, SAVE_USER, UDPATE_SCORE } from '../actions/actionPlayer';
 import { QUESTIONS } from '../actions/actionLogin';
 
 const INITIAL_STATE_PLAYER = {
@@ -24,6 +24,11 @@ const playerReducer = (state = INITIAL_STATE_PLAYER, action) => {
     return {
       ...state,
       questions: action.questions,
+    };
+  case UDPATE_SCORE:
+    return {
+      ...state,
+      score: action.score,
     };
   default:
     return state;

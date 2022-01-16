@@ -11,3 +11,10 @@ export const saveUser = (name) => ({
   type: SAVE_USER,
   name,
 });
+
+export const UDPATE_SCORE = 'UPDATE_SCORE';
+
+export const updateScore = (score) => ({
+  type: UDPATE_SCORE,
+  score,
+});

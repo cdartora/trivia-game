@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import Answers from './Answers';
 import './Game.css';
 
@@ -17,12 +18,12 @@ class Game extends Component {
 
   nextQuestion() {
     const { questionNumber } = this.state;
-    const { questions } = this.props;
+    const { questions, history } = this.props;
 
     if (questionNumber !== questions.length - 1) {
       this.setState((prev) => ({ questionNumber: prev.questionNumber + 1 }));
     } else {
-      console.log('acabou');
+      history.push('/feedback');
     }
   }
 
@@ -44,6 +45,8 @@ class Game extends Component {
                 <Answers
                   correct={ questions[questionNumber].correct_answer }
                   wrong={ questions[questionNumber].incorrect_answers }
+                  difficulty={ questions[questionNumber].difficulty }
+                  nextQuestion={ this.nextQuestion }
                 />
               </div>
             ) : null
@@ -58,10 +61,11 @@ const mapStateToProps = (state) => ({
   questions: state.player.questions || undefined,
 });
 
-export default connect(mapStateToProps)(Game);
+export default withRouter(connect(mapStateToProps)(Game));
 
 Game.propTypes = {
   questions: PropTypes.arrayOf(Object),
+  history: PropTypes.objectOf(Object).isRequired,
 };
 
 Game.defaultProps = {

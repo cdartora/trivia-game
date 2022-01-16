@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { updateScore } from '../redux/actions/actionPlayer';
 import './Answers.css';
 
 class Answers extends Component {
@@ -13,7 +15,6 @@ class Answers extends Component {
     };
 
     this.saveRandomClassnames = this.saveRandomClassnames.bind(this);
-    this.handleAnswerClick = this.handleAnswerClick.bind(this);
     this.timerCounter = this.timerCounter.bind(this);
   }
 
@@ -23,17 +24,63 @@ class Answers extends Component {
   }
 
   setTimer() {
-    const thirtySeconds = 30010;
-    const oneSecond = 1000;
-    setTimeout(this.timeIsOver, thirtySeconds);
-    setInterval(this.timerCounter, oneSecond);
+    const { isRunning } = this.state;
+    const THIRTY_SECONDS = 30010;
+    const ONE_SECOND = 1000;
+
+    setTimeout(this.timeIsOver, THIRTY_SECONDS);
+
+    if (isRunning) {
+      setInterval(this.timerCounter, ONE_SECOND);
+    }
   }
+
+  nextHandler = () => {
+    const { nextQuestion } = this.props;
+    nextQuestion();
+    this.setState({ timer: 30, isRunning: true });
+    this.setTimer();
+  };
 
   timeIsOver = () => this.setState({ isRunning: false });
 
-  handleAnswerClick = () => this.setState({ isRunning: false });
+  correctAnswerClick = () => {
+    const { timer } = this.state;
+    const { difficulty, newScore } = this.props;
 
-  timerCounter() {
+    this.setState({ isRunning: false });
+
+    const score = this.calculateScore(timer, difficulty);
+
+    newScore(score);
+  };
+
+  incorrectAnswerClick = () => this.setState({ isRunning: false });
+
+  calculateScore = (timer, difficulty) => {
+    let score;
+    const BASE_POINTS = 10;
+    const HARD_MULTIPLIER = 3;
+    const MEDIUM_MULTIPLIER = 2;
+
+    switch (difficulty) {
+    case 'hard':
+      score = BASE_POINTS + (timer * HARD_MULTIPLIER);
+      break;
+    case 'medium':
+      score = BASE_POINTS + (timer * MEDIUM_MULTIPLIER);
+      break;
+    case 'easy':
+      score = BASE_POINTS + timer;
+      break;
+    default:
+      score = BASE_POINTS;
+    }
+
+    return score;
+  }
+
+  timerCounter = () => {
     const { isRunning } = this.state;
 
     if (isRunning) {
@@ -74,7 +121,7 @@ class Answers extends Component {
           type="button"
           data-testid="correct-answer"
           className={ `position${classes[0]} ${isRunning ? null : 'correct'}` }
-          onClick={ this.handleAnswerClick }
+          onClick={ this.correctAnswerClick }
           disabled={ !isRunning }
         >
           {correct}
@@ -87,7 +134,7 @@ class Answers extends Component {
               data-testid={ `wrong-answer${index} wrong` }
               className={ `position${classes[index + 1]}
               ${isRunning ? null : 'incorrect'}` }
-              onClick={ this.handleAnswerClick }
+              onClick={ this.incorrectAnswerClick }
               key={ index }
               disabled={ !isRunning }
             >
@@ -101,14 +148,35 @@ class Answers extends Component {
           {' '}
           segundos
         </div>
+
+        {
+          isRunning ? null : (
+            <button
+              type="button"
+              className="next-button"
+              data-testid="btn-next"
+              onClick={ this.nextHandler }
+            >
+              Próxima Pergunta
+
+            </button>
+          )
+        }
       </div>
     );
   }
 }
 
-export default Answers;
+const mapDispatchToProps = (dispatch) => ({
+  newScore: (score) => dispatch(updateScore(score)),
+});
+
+export default connect(null, mapDispatchToProps)(Answers);
 
 Answers.propTypes = {
   correct: PropTypes.string.isRequired,
   wrong: PropTypes.arrayOf(String).isRequired,
+  nextQuestion: PropTypes.func.isRequired,
+  newScore: PropTypes.func.isRequired,
+  difficulty: PropTypes.string.isRequired,
 };
