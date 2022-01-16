@@ -9,11 +9,11 @@ class Answers extends Component {
     this.state = {
       classes: [],
       isRunning: true,
+      timer: 30,
     };
 
     this.saveRandomClassnames = this.saveRandomClassnames.bind(this);
     this.handleAnswerClick = this.handleAnswerClick.bind(this);
-    this.timeIsOver = this.timeIsOver.bind(this);
     this.timerCounter = this.timerCounter.bind(this);
   }
 
@@ -23,21 +23,21 @@ class Answers extends Component {
   }
 
   setTimer() {
-    const thirtySeconds = 31000;
+    const thirtySeconds = 30010;
     const oneSecond = 1000;
     setTimeout(this.timeIsOver, thirtySeconds);
     setInterval(this.timerCounter, oneSecond);
   }
 
-  timeIsOver() {
-    this.setState({ isRunning: false });
-  }
+  timeIsOver = () => this.setState({ isRunning: false });
+
+  handleAnswerClick = () => this.setState({ isRunning: false });
 
   timerCounter() {
     const { isRunning } = this.state;
 
     if (isRunning) {
-      console.log('tic');
+      this.setState((prev) => ({ timer: prev.timer - 1 }));
     }
   }
 
@@ -65,13 +65,9 @@ class Answers extends Component {
     this.setState({ classes });
   }
 
-  handleAnswerClick() {
-    this.setState({ isRunning: false });
-  }
-
   render() {
     const { correct, wrong } = this.props;
-    const { classes, isRunning } = this.state;
+    const { classes, isRunning, timer } = this.state;
     return (
       <div className="answers-container" data-testid="answer-options">
         <button
@@ -100,6 +96,11 @@ class Answers extends Component {
             </button>
           ))
         }
+        <div>
+          {timer}
+          {' '}
+          segundos
+        </div>
       </div>
     );
   }
