@@ -13,10 +13,32 @@ class Answers extends Component {
 
     this.saveRandomClassnames = this.saveRandomClassnames.bind(this);
     this.handleAnswerClick = this.handleAnswerClick.bind(this);
+    this.timeIsOver = this.timeIsOver.bind(this);
+    this.timerCounter = this.timerCounter.bind(this);
   }
 
   componentDidMount() {
     this.countAnswers();
+    this.setTimer();
+  }
+
+  setTimer() {
+    const thirtySeconds = 31000;
+    const oneSecond = 1000;
+    setTimeout(this.timeIsOver, thirtySeconds);
+    setInterval(this.timerCounter, oneSecond);
+  }
+
+  timeIsOver() {
+    this.setState({ isRunning: false });
+  }
+
+  timerCounter() {
+    const { isRunning } = this.state;
+
+    if (isRunning) {
+      console.log('tic');
+    }
   }
 
   countAnswers() {
@@ -57,6 +79,7 @@ class Answers extends Component {
           data-testid="correct-answer"
           className={ `position${classes[0]} ${isRunning ? null : 'correct'}` }
           onClick={ this.handleAnswerClick }
+          disabled={ !isRunning }
         >
           {correct}
 
@@ -66,9 +89,11 @@ class Answers extends Component {
             <button
               type="button"
               data-testid={ `wrong-answer${index} wrong` }
-              className={ `position${classes[index + 1]} ${isRunning ? null : 'incorrect'}` }
+              className={ `position${classes[index + 1]}
+              ${isRunning ? null : 'incorrect'}` }
               onClick={ this.handleAnswerClick }
               key={ index }
+              disabled={ !isRunning }
             >
               {answer}
 
