@@ -1,21 +1,43 @@
+import fetchQuestions from '../helpers/fetchQuestions';
 import fetchToken from '../helpers/fetchToken';
 import saveToken from '../helpers/saveToken';
 
 export const LOGIN = 'LOGIN';
 
-export const userLogin = (email, token) => {
+export const userLogin = (email) => ({
+  type: LOGIN,
+  email,
+});
+
+export const GET_REQUEST = 'GET_REQUEST';
+
+export const getRequestToken = (token) => {
   // salva o token no localStorage
   saveToken(token);
 
   return {
-    type: LOGIN,
-    email,
+    type: GET_REQUEST,
     token,
   };
 };
 
+export const QUESTIONS = 'QUESTIONS';
+
+export const saveQuestions = (questions) => ({
+  type: QUESTIONS,
+  questions,
+});
+
 export const loginHandler = (email) => (dispatch) => {
-  fetchToken().then(
-    (data) => dispatch(userLogin(email, data.token)),
-  );
+  fetchToken()
+    .then(
+      ({ token }) => {
+        dispatch(userLogin(email));
+        dispatch(getRequestToken(token));
+        fetchQuestions(token)
+          .then((questions) => {
+            dispatch(saveQuestions(questions.results));
+          });
+      },
+    );
 };

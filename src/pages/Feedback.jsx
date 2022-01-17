@@ -1,16 +1,18 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+/* import { withRouter } from 'react-router'; */
 import { connect } from 'react-redux';
-import { Header } from '../components/Header';
-import Game from '../components/Game';
+import Header from '../components/Header';
 
-export class GameBody extends Component {
+class Feedback extends Component {
   render() {
     const { email, name, score } = this.props;
     return (
-      <div>
+      <div
+        data-testid="feedback-text"
+      >
         <Header email={ email } name={ name } score={ score } />
-        <Game />
+        Feedback
       </div>
     );
   }
@@ -22,13 +24,9 @@ const mapStateToProps = (state) => ({
   name: state.player.name,
 });
 
-// const mapDispatchToProps = {
+export default connect(mapStateToProps)(Feedback);
 
-// };
-
-export default connect(mapStateToProps)(GameBody);
-
-GameBody.propTypes = {
+Feedback.propTypes = {
   email: PropTypes.string.isRequired,
   score: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,

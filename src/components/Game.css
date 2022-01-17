@@ -1,0 +1,16 @@
+.game-menu-container {
+  align-items: center;
+  border: black 1px solid;
+  display: flex;
+  justify-content: center;
+  margin-top: 100px;
+  padding: 30px;
+  text-align: center;
+  width: 50vw;
+}
+
+.game-container {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}

@@ -7,7 +7,14 @@ export const saveEmailHeader = (gravatarEmail) => ({
 
 export const SAVE_USER = 'SAVE_USER';
 
-export const saveUser = (Username) => ({
+export const saveUser = (name) => ({
   type: SAVE_USER,
-  Username,
+  name,
+});
+
+export const UDPATE_SCORE = 'UPDATE_SCORE';
+
+export const updateScore = (score) => ({
+  type: UDPATE_SCORE,
+  score,
 });

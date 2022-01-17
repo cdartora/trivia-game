@@ -1,0 +1,38 @@
+.next-button {
+  order: 5;
+}
+
+.incorrect {
+  border: 3px solid red;
+}
+
+.correct {
+  border: 3px solid rgb(6, 240, 15);
+}
+
+.position1 {
+  margin-bottom: 10px;
+  order: 1;
+}
+
+.position2 {
+  margin-bottom: 10px;
+  order: 2;
+}
+
+.position3 {
+  margin-bottom: 10px;
+  order: 3;
+
+}
+
+.position4 {
+  order: 4;
+}
+
+.answers-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 20px;
+}

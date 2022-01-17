@@ -1,0 +1,36 @@
+.avatar {
+  background-color: lightcoral;
+  border-radius: 20px;
+  height: 10%;
+  padding: 6px;
+  width: 1em;
+}
+
+.header-score {
+  align-items: center;
+  display: flex;
+  padding: 10px 20px;
+}
+
+.header-name {
+  margin-left: 10px;
+}
+
+.header-info {
+  align-items: center;
+  display: flex;
+  padding: 10px 20px;
+}
+
+.header-container {
+  align-items: center;
+  background-color: lightgreen;
+  border: 1.5px solid black;
+  display: flex;
+  justify-content: space-between;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
