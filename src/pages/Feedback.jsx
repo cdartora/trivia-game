@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 /* import { withRouter } from 'react-router'; */
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 
 class Feedback extends Component {
@@ -13,6 +14,7 @@ class Feedback extends Component {
       >
         <Header email={ email } name={ name } score={ score } />
         Feedback
+        <Link to="/" data-testid="btn-play-again">Play Again</Link>
       </div>
     );
   }
