@@ -12,6 +12,7 @@ class Answers extends Component {
       classes: [],
       isRunning: true,
       timer: 30,
+      correctAnswers: 0,
     };
 
     this.saveRandomClassnames = this.saveRandomClassnames.bind(this);
@@ -48,7 +49,9 @@ class Answers extends Component {
     const { timer } = this.state;
     const { difficulty, newScore } = this.props;
 
-    this.setState({ isRunning: false });
+    this.setState((prev) => ({
+      isRunning: false, correctAnswers: prev.correctAnswers + 1,
+    }));
 
     const score = this.calculateScore(timer, difficulty);
 
