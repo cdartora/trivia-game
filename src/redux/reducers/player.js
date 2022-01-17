@@ -28,7 +28,7 @@ const playerReducer = (state = INITIAL_STATE_PLAYER, action) => {
   case UDPATE_SCORE:
     return {
       ...state,
-      score: action.score,
+      score: state.score + action.score,
     };
   default:
     return state;

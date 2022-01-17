@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Header } from '../components/Header';
 import Game from '../components/Game';
 
-export class GameBody extends Component {
+class GameBody extends Component {
   render() {
     const { email, name, score } = this.props;
     return (
