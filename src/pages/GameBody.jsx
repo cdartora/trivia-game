@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Header } from '../components/Header';
+import Header from '../components/Header';
 import Game from '../components/Game';
 
 export class GameBody extends Component {
   render() {
-    const { email, name, score } = this.props;
     return (
       <div>
-        <Header email={ email } name={ name } score={ score } />
+        <Header />
         <Game />
       </div>
     );
@@ -27,9 +26,3 @@ const mapStateToProps = (state) => ({
 // };
 
 export default connect(mapStateToProps)(GameBody);
-
-GameBody.propTypes = {
-  email: PropTypes.string.isRequired,
-  score: PropTypes.number.isRequired,
-  name: PropTypes.string.isRequired,
-};

@@ -6,19 +6,40 @@ import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 
 class Feedback extends Component {
+  constructor() {
+    super();
+
+    this.historyPush = this.historyPush.bind(this);
+  }
+
+  historyPush() {
+    const { history } = this.props;
+    history.push('ranking');
+  }
+
   render() {
-    const { email, name, score } = this.props;
     return (
       <div
         data-testid="feedback-text"
       >
-        <Header email={ email } name={ name } score={ score } />
+        <Header />
         Feedback
         <Link to="/" data-testid="btn-play-again">Play Again</Link>
+        <button
+          type="button"
+          onClick={ this.historyPush }
+          data-testid="btn-ranking"
+        >
+          Ranking
+        </button>
       </div>
     );
   }
 }
+
+Feedback.propTypes = {
+  history: PropTypes.objectOf(Object).isRequired,
+};
 
 const mapStateToProps = (state) => ({
   email: state.user.email,
@@ -27,9 +48,3 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps)(Feedback);
-
-Feedback.propTypes = {
-  email: PropTypes.string.isRequired,
-  score: PropTypes.number.isRequired,
-  name: PropTypes.string.isRequired,
-};
