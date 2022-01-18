@@ -1,4 +1,5 @@
-import { SAVE_EMAIL, SAVE_USER, UDPATE_SCORE } from '../actions/actionPlayer';
+import { SAVE_EMAIL, SAVE_USER, UDPATE_SCORE }
+from '../actions/actionPlayer';
 import { QUESTIONS } from '../actions/actionLogin';
 
 const INITIAL_STATE_PLAYER = {
@@ -34,5 +35,4 @@ const playerReducer = (state = INITIAL_STATE_PLAYER, action) => {
     return state;
   }
 };
-
 export default playerReducer;
