@@ -2,8 +2,11 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import md5 from 'crypto-js/md5';
 import Answers from './Answers';
 import './Game.css';
+import savePlayerOnRanking from '../redux/helpers/savePlayerOnRanking';
+import { resetScore } from '../redux/actions/actionPlayer';
 
 class Game extends Component {
   constructor() {
@@ -18,13 +21,22 @@ class Game extends Component {
 
   nextQuestion() {
     const { questionNumber } = this.state;
-    const { questions, history } = this.props;
+    const { questions, history, name, score, standardScore } = this.props;
 
     if (questionNumber !== questions.length - 1) {
       this.setState((prev) => ({ questionNumber: prev.questionNumber + 1 }));
     } else {
+      savePlayerOnRanking(this.hashGenerator(), name, score);
+      standardScore();
       history.push('/feedback');
     }
+  }
+
+  hashGenerator() {
+    const { gravatar } = this.props;
+    const hash = md5(gravatar).toString();
+    const imgToken = `https://www.gravatar.com/avatar/${hash}`;
+    return imgToken;
   }
 
   render() {
@@ -59,13 +71,24 @@ class Game extends Component {
 
 const mapStateToProps = (state) => ({
   questions: state.player.questions || undefined,
+  score: state.player.score,
+  name: state.player.name,
+  gravatar: state.player.gravatarEmail,
 });
 
-export default withRouter(connect(mapStateToProps)(Game));
+const mapDispatchToProps = (dispatch) => ({
+  standardScore: () => dispatch(resetScore()),
+});
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Game));
 
 Game.propTypes = {
   questions: PropTypes.arrayOf(Object),
   history: PropTypes.objectOf(Object).isRequired,
+  name: PropTypes.string.isRequired,
+  score: PropTypes.number.isRequired,
+  standardScore: PropTypes.func.isRequired,
+  gravatar: PropTypes.string.isRequired,
 };
 
 Game.defaultProps = {

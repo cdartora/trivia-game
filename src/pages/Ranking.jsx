@@ -1,22 +1,25 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { getRanking } from '../redux/helpers/savePlayerOnRanking';
 
-export class Ranking extends Component {
+class Ranking extends Component {
   render() {
     return (
       <div>
-        <strong data-testid="ranking-title">
-          Ranking
-        </strong>
+        <Link to="/" data-testid="btn-go-home">Play Again</Link>
+        {
+          getRanking().map(({ avatar, name, score }, index) => (
+            <div key={ index }>
+              <img src={ avatar } alt={ `${name} avatar` } />
+              <p data-testid={ `player-name-${index}` }>{name}</p>
+              <p data-testid={ `player-score-${index}` }>{score}</p>
+            </div>
+          ))
+        }
       </div>
     );
   }
 }
 
-const mapStateToProps = (state) => ({
-  email: state.user.email,
-  score: state.player.score,
-  name: state.player.name,
-});
+export default Ranking;
 
-export default connect(mapStateToProps)(Ranking);

@@ -41,7 +41,6 @@ class Header extends Component {
     );
   }
 }
-
 const mapStateToProps = (state) => ({
   email: state.user.email,
   score: state.player.score,

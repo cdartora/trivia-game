@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { loginHandler } from '../redux/actions/actionLogin';
+import { loginHandler, handleQuestions } from '../redux/actions/actionLogin';
 import { saveEmailHeader, saveUser } from '../redux/actions/actionPlayer';
 import './login.css';
 
@@ -41,10 +41,17 @@ export class Login extends Component {
     e.preventDefault();
 
     const { name, email } = this.state;
-    const { history, saveName, saveEmail, saveHeaderEmail } = this.props;
+    const { history,
+      saveName,
+      saveEmail,
+      saveHeaderEmail,
+      fetchQuestions,
+    } = this.props;
+
     saveEmail(email);
     saveHeaderEmail(email);
     saveName(name);
+    fetchQuestions();
 
     this.setState({
       email: '',
@@ -129,6 +136,7 @@ Login.propTypes = {
   saveName: PropTypes.func.isRequired,
   saveEmail: PropTypes.func.isRequired,
   saveHeaderEmail: PropTypes.func.isRequired,
+  fetchQuestions: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -142,6 +150,7 @@ const mapDispatchToProps = (dispatch) => ({
   saveEmail: (email) => (dispatch(loginHandler(email))),
   saveName: (UserName) => (dispatch(saveUser(UserName))),
   saveHeaderEmail: (email) => (dispatch(saveEmailHeader(email))),
+  fetchQuestions: () => (dispatch(handleQuestions())),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-/* import { withRouter } from 'react-router'; */
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Header from '../components/Header';
@@ -21,7 +21,6 @@ class Feedback extends Component {
   render() {
     const WELLDONE = 3;
     const { correctAnswers, score } = this.props;
-    console.log(correctAnswers);
     return (
       <div>
         <Header />
@@ -61,3 +60,7 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps)(Feedback);
+
+Feedback.propTypes = {
+  history: PropTypes.objectOf(Object).isRequired,
+};

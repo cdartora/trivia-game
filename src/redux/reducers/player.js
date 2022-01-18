@@ -1,5 +1,8 @@
-import { SAVE_EMAIL, SAVE_USER, UDPATE_SCORE }
-from '../actions/actionPlayer';
+import {
+  SAVE_EMAIL,
+  SAVE_USER,
+  UDPATE_SCORE,
+  RESET_SCORE } from '../actions/actionPlayer';
 import { QUESTIONS } from '../actions/actionLogin';
 
 const INITIAL_STATE_PLAYER = {
@@ -30,6 +33,11 @@ const playerReducer = (state = INITIAL_STATE_PLAYER, action) => {
     return {
       ...state,
       score: state.score + action.score,
+    };
+  case RESET_SCORE:
+    return {
+      ...state,
+      score: 0,
     };
   default:
     return state;
