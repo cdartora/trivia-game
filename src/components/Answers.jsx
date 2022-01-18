@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { updateScore } from '../redux/actions/actionPlayer';
+import { updateAssertions, updateScore } from '../redux/actions/actionPlayer';
 import './Answers.css';
-import { updateAnswersCount } from '../redux/actions/actionLogin';
 
 class Answers extends Component {
   constructor() {
@@ -13,7 +12,6 @@ class Answers extends Component {
       classes: [],
       isRunning: true,
       timer: 30,
-      correctAnswers: 0,
     };
 
     this.saveRandomClassnames = this.saveRandomClassnames.bind(this);
@@ -47,17 +45,15 @@ class Answers extends Component {
   timeIsOver = () => this.setState({ isRunning: false });
 
   correctAnswerClick = () => {
-    const { timer, correctAnswers } = this.state;
+    const { timer } = this.state;
     const { difficulty, newScore, recordCount } = this.props;
 
-    this.setState((prev) => ({
-      isRunning: false, correctAnswers: prev.correctAnswers + 1,
-    }));
+    this.setState({ isRunning: false });
 
     const score = this.calculateScore(timer, difficulty);
 
     newScore(score);
-    recordCount(correctAnswers);
+    recordCount();
   };
 
   incorrectAnswerClick = () => this.setState({ isRunning: false });
@@ -175,7 +171,7 @@ class Answers extends Component {
 
 const mapDispatchToProps = (dispatch) => ({
   newScore: (score) => dispatch(updateScore(score)),
-  recordCount: (correctAnswers) => dispatch(updateAnswersCount(correctAnswers)),
+  recordCount: () => dispatch(updateAssertions()),
 });
 
 export default connect(null, mapDispatchToProps)(Answers);

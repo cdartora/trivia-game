@@ -28,20 +28,16 @@ export const saveQuestions = (questions) => ({
   questions,
 });
 
-export const UPDATE_ANSWERS_COUNT = 'UPDATE_ANSWERS_COUNT';
-export const updateAnswersCount = (correctAnswers) => ({
-  type: UPDATE_ANSWERS_COUNT,
-  correctAnswers,
-});
-
 export const loginHandler = (email) => async (dispatch) => {
   dispatch(userLogin(email));
+  const { token } = await fetchToken();
+  dispatch(getRequestToken(token));
 };
 
 const validateToken = async (token, dispatch) => {
   if (!token) {
-    token = await fetchToken();
-    dispatch(getRequestToken(token));
+    const data = await fetchToken();
+    dispatch(getRequestToken(data.token));
   }
 };
 

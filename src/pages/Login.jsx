@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { loginHandler, handleQuestions } from '../redux/actions/actionLogin';
-import { saveEmailHeader, saveUser } from '../redux/actions/actionPlayer';
+import { resetScore, saveEmailHeader, saveUser } from '../redux/actions/actionPlayer';
 import './login.css';
 
 export class Login extends Component {
@@ -19,6 +19,12 @@ export class Login extends Component {
     this.validateButton = this.validateButton.bind(this);
     this.clickButton = this.clickButton.bind(this);
     this.handleSettings = this.handleSettings.bind(this);
+  }
+
+  componentDidMount() {
+    const { standardScore } = this.props;
+
+    standardScore();
   }
 
   handleChange(event) {
@@ -137,6 +143,7 @@ Login.propTypes = {
   saveEmail: PropTypes.func.isRequired,
   saveHeaderEmail: PropTypes.func.isRequired,
   fetchQuestions: PropTypes.func.isRequired,
+  standardScore: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -151,6 +158,7 @@ const mapDispatchToProps = (dispatch) => ({
   saveName: (UserName) => (dispatch(saveUser(UserName))),
   saveHeaderEmail: (email) => (dispatch(saveEmailHeader(email))),
   fetchQuestions: () => (dispatch(handleQuestions())),
+  standardScore: () => dispatch(resetScore()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

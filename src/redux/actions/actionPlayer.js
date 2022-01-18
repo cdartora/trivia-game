@@ -22,3 +22,9 @@ export const updateScore = (score) => ({
 export const RESET_SCORE = 'RESET_SCORE';
 
 export const resetScore = () => ({ type: RESET_SCORE });
+
+export const UPDATE_ASSERTIONS = 'UPDATE_ASSERTIONS';
+
+export const updateAssertions = () => ({
+  type: UPDATE_ASSERTIONS,
+});

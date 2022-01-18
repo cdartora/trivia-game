@@ -6,7 +6,6 @@ import md5 from 'crypto-js/md5';
 import Answers from './Answers';
 import './Game.css';
 import savePlayerOnRanking from '../redux/helpers/savePlayerOnRanking';
-import { resetScore } from '../redux/actions/actionPlayer';
 
 class Game extends Component {
   constructor() {
@@ -21,13 +20,12 @@ class Game extends Component {
 
   nextQuestion() {
     const { questionNumber } = this.state;
-    const { questions, history, name, score, standardScore } = this.props;
+    const { questions, history, name, score } = this.props;
 
     if (questionNumber !== questions.length - 1) {
       this.setState((prev) => ({ questionNumber: prev.questionNumber + 1 }));
     } else {
       savePlayerOnRanking(this.hashGenerator(), name, score);
-      standardScore();
       history.push('/feedback');
     }
   }
@@ -76,18 +74,13 @@ const mapStateToProps = (state) => ({
   gravatar: state.player.gravatarEmail,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  standardScore: () => dispatch(resetScore()),
-});
-
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Game));
+export default withRouter(connect(mapStateToProps)(Game));
 
 Game.propTypes = {
   questions: PropTypes.arrayOf(Object),
   history: PropTypes.objectOf(Object).isRequired,
   name: PropTypes.string.isRequired,
   score: PropTypes.number.isRequired,
-  standardScore: PropTypes.func.isRequired,
   gravatar: PropTypes.string.isRequired,
 };
 

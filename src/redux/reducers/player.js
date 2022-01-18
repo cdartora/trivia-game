@@ -2,6 +2,7 @@ import {
   SAVE_EMAIL,
   SAVE_USER,
   UDPATE_SCORE,
+  UPDATE_ASSERTIONS,
   RESET_SCORE } from '../actions/actionPlayer';
 import { QUESTIONS } from '../actions/actionLogin';
 
@@ -35,9 +36,11 @@ const playerReducer = (state = INITIAL_STATE_PLAYER, action) => {
       score: state.score + action.score,
     };
   case RESET_SCORE:
+    return { ...state, score: 0 };
+  case UPDATE_ASSERTIONS:
     return {
       ...state,
-      score: 0,
+      assertions: state.assertions + 1,
     };
   default:
     return state;

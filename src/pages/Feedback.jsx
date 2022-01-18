@@ -2,9 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import Header from '../components/Header';
-import './feedback.css';
+import './Feedback.css';
 
 class Feedback extends Component {
   constructor() {
@@ -20,7 +19,7 @@ class Feedback extends Component {
 
   render() {
     const WELLDONE = 3;
-    const { correctAnswers, score } = this.props;
+    const { assertions, score } = this.props;
     return (
       <div>
         <Header />
@@ -28,14 +27,24 @@ class Feedback extends Component {
           <p data-testid="feedback-total-score">
             {score}
           </p>
+          <strong>
+            Numero de Acertos
+            {' '}
+          </strong>
           <strong data-testid="feedback-total-question">
-            {`total de acertos:${correctAnswers}`}
+            {assertions}
           </strong>
-          <strong data-testid="feedback-text">
-            {correctAnswers >= WELLDONE ? 'Well Done!' : 'Could be better...'}
-          </strong>
+          <p data-testid="feedback-text">
+            {assertions >= WELLDONE ? 'Well Done!' : 'Could be better...'}
+          </p>
         </div>
-        <Link to="/" data-testid="btn-play-again">Play Again</Link>
+        <Link
+          to="/"
+          data-testid="btn-play-again"
+        >
+          Play Again
+
+        </Link>
         <button
           type="button"
           onClick={ this.historyPush }
@@ -48,19 +57,15 @@ class Feedback extends Component {
   }
 }
 
-Feedback.propTypes = {
-  history: PropTypes.objectOf(Object).isRequired,
-};
-
 const mapStateToProps = (state) => ({
-  email: state.user.email,
   score: state.player.score,
-  name: state.player.name,
-  correctAnswers: state.user.correctAnswers,
+  assertions: state.player.assertions,
 });
 
 export default connect(mapStateToProps)(Feedback);
 
 Feedback.propTypes = {
   history: PropTypes.objectOf(Object).isRequired,
+  assertions: PropTypes.number.isRequired,
+  score: PropTypes.number.isRequired,
 };
