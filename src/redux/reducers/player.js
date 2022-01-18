@@ -43,5 +43,4 @@ const playerReducer = (state = INITIAL_STATE_PLAYER, action) => {
     return state;
   }
 };
-
 export default playerReducer;

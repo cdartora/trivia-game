@@ -22,3 +22,4 @@ class Ranking extends Component {
 }
 
 export default Ranking;
+

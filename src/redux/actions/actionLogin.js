@@ -28,6 +28,12 @@ export const saveQuestions = (questions) => ({
   questions,
 });
 
+export const UPDATE_ANSWERS_COUNT = 'UPDATE_ANSWERS_COUNT';
+export const updateAnswersCount = (correctAnswers) => ({
+  type: UPDATE_ANSWERS_COUNT,
+  correctAnswers,
+});
+
 export const loginHandler = (email) => async (dispatch) => {
   dispatch(userLogin(email));
 };

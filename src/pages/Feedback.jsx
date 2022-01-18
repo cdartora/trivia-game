@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import Header from '../components/Header';
+import './feedback.css';
 
 class Feedback extends Component {
   constructor() {
@@ -17,12 +19,22 @@ class Feedback extends Component {
   }
 
   render() {
+    const WELLDONE = 3;
+    const { correctAnswers, score } = this.props;
     return (
-      <div
-        data-testid="feedback-text"
-      >
+      <div>
         <Header />
-        Feedback
+        <div>
+          <p data-testid="feedback-total-score">
+            {score}
+          </p>
+          <strong data-testid="feedback-total-question">
+            {`total de acertos:${correctAnswers}`}
+          </strong>
+          <strong data-testid="feedback-text">
+            {correctAnswers >= WELLDONE ? 'Well Done!' : 'Could be better...'}
+          </strong>
+        </div>
         <Link to="/" data-testid="btn-play-again">Play Again</Link>
         <button
           type="button"
@@ -36,10 +48,15 @@ class Feedback extends Component {
   }
 }
 
+Feedback.propTypes = {
+  history: PropTypes.objectOf(Object).isRequired,
+};
+
 const mapStateToProps = (state) => ({
   email: state.user.email,
   score: state.player.score,
   name: state.player.name,
+  correctAnswers: state.user.correctAnswers,
 });
 
 export default connect(mapStateToProps)(Feedback);
