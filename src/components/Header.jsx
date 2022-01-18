@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import md5 from 'crypto-js/md5';
 import './Header.css';
 
-export class Header extends Component {
+class Header extends Component {
   constructor() {
     super();
 
@@ -41,12 +41,13 @@ export class Header extends Component {
     );
   }
 }
+const mapStateToProps = (state) => ({
+  email: state.user.email,
+  score: state.player.score,
+  name: state.player.name,
+});
 
-// const mapDispatchToProps = {
-
-// }
-
-export default connect(null)(Header);
+export default connect(mapStateToProps)(Header);
 
 Header.propTypes = {
   email: PropTypes.string.isRequired,

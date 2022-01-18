@@ -22,4 +22,6 @@ const savePlayerOnRanking = (avatar, name, score) => {
   localStorage.setItem('ranking', JSON.stringify(orderedRanking));
 };
 
+export const getRanking = () => JSON.parse(localStorage.getItem('ranking'));
+
 export default savePlayerOnRanking;

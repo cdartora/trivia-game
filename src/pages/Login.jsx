@@ -47,6 +47,7 @@ export class Login extends Component {
       saveHeaderEmail,
       fetchQuestions,
     } = this.props;
+
     saveEmail(email);
     saveHeaderEmail(email);
     saveName(name);
@@ -135,6 +136,7 @@ Login.propTypes = {
   saveName: PropTypes.func.isRequired,
   saveEmail: PropTypes.func.isRequired,
   saveHeaderEmail: PropTypes.func.isRequired,
+  fetchQuestions: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({

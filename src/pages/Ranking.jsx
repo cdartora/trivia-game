@@ -1,26 +1,24 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+import { getRanking } from '../redux/helpers/savePlayerOnRanking';
 
 class Ranking extends Component {
   render() {
-    const { history } = this.props;
     return (
       <div>
-        <button
-          type="button"
-          onClick={ () => history.push('/') }
-          data-testid="btn-go-home"
-        >
-          Jogar De Novo
-
-        </button>
+        <Link to="/" data-testid="btn-go-home">Play Again</Link>
+        {
+          getRanking().map(({ avatar, name, score }, index) => (
+            <div key={ index }>
+              <img src={ avatar } alt={ `${name} avatar` } />
+              <p data-testid={ `player-name-${index}` }>{name}</p>
+              <p data-testid={ `player-score-${index}` }>{score}</p>
+            </div>
+          ))
+        }
       </div>
     );
   }
 }
 
 export default Ranking;
-
-Ranking.propTypes = {
-  history: PropTypes.objectOf(Object).isRequired,
-};
