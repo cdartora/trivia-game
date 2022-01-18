@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { updateScore } from '../redux/actions/actionPlayer';
 import './Answers.css';
+import { updateAnswersCount } from '../redux/actions/actionLogin';
 
 class Answers extends Component {
   constructor() {
@@ -46,8 +47,8 @@ class Answers extends Component {
   timeIsOver = () => this.setState({ isRunning: false });
 
   correctAnswerClick = () => {
-    const { timer } = this.state;
-    const { difficulty, newScore } = this.props;
+    const { timer, correctAnswers } = this.state;
+    const { difficulty, newScore, recordCount } = this.props;
 
     this.setState((prev) => ({
       isRunning: false, correctAnswers: prev.correctAnswers + 1,
@@ -56,6 +57,7 @@ class Answers extends Component {
     const score = this.calculateScore(timer, difficulty);
 
     newScore(score);
+    recordCount(correctAnswers);
   };
 
   incorrectAnswerClick = () => this.setState({ isRunning: false });
@@ -117,7 +119,8 @@ class Answers extends Component {
 
   render() {
     const { correct, wrong } = this.props;
-    const { classes, isRunning, timer } = this.state;
+    const { classes, isRunning, timer, correctAnswers } = this.state;
+    console.log(correctAnswers);
     return (
       <div className="answers-container" data-testid="answer-options">
         <button
@@ -172,6 +175,7 @@ class Answers extends Component {
 
 const mapDispatchToProps = (dispatch) => ({
   newScore: (score) => dispatch(updateScore(score)),
+  recordCount: (correctAnswers) => dispatch(updateAnswersCount(correctAnswers)),
 });
 
 export default connect(null, mapDispatchToProps)(Answers);
@@ -182,4 +186,5 @@ Answers.propTypes = {
   nextQuestion: PropTypes.func.isRequired,
   newScore: PropTypes.func.isRequired,
   difficulty: PropTypes.string.isRequired,
+  recordCount: PropTypes.func.isRequired,
 };
