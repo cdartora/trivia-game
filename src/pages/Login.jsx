@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { loginHandler, handleQuestions } from '../redux/actions/actionLogin';
 import { resetScore, saveEmailHeader, saveUser } from '../redux/actions/actionPlayer';
-import './login.css';
+import './Login.css';
 
 export class Login extends Component {
   constructor() {
@@ -78,8 +78,7 @@ export class Login extends Component {
     return (
       <div className="login-container">
         <form className="login-form">
-          <h1>Trivia</h1>
-          <h2>Login</h2>
+          <h2 id="login-title">Login</h2>
           <label className="login-input" htmlFor="name">
             <input
               data-testid="input-player-name"

@@ -42,7 +42,12 @@ class Answers extends Component {
     this.setTimer();
   };
 
-  timeIsOver = () => this.setState({ isRunning: false });
+  timeIsOver = () => {
+    const { isRunning } = this.state;
+    if (isRunning) {
+      this.setState({ isRunning: false });
+    }
+  }
 
   correctAnswerClick = () => {
     const { timer } = this.state;
@@ -122,7 +127,9 @@ class Answers extends Component {
         <button
           type="button"
           data-testid="correct-answer"
-          className={ `position${classes[0]} ${isRunning ? null : 'correct'}` }
+          className={
+            `position${classes[0]} ${isRunning ? null : 'correct'} button-answer`
+          }
           onClick={ this.correctAnswerClick }
           disabled={ !isRunning }
         >
@@ -135,7 +142,7 @@ class Answers extends Component {
               type="button"
               data-testid={ `wrong-answer${index} wrong` }
               className={ `position${classes[index + 1]}
-              ${isRunning ? null : 'incorrect'}` }
+              ${isRunning ? null : 'incorrect'} button-answer` }
               onClick={ this.incorrectAnswerClick }
               key={ index }
               disabled={ !isRunning }

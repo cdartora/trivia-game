@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Header from '../components/Header';
 import Game from '../components/Game';
+import './GameBody.css';
 
 class GameBody extends Component {
   render() {
     return (
-      <div>
+      <div className="gamebody-container">
         <Header />
         <Game />
       </div>

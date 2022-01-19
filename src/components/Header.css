@@ -1,15 +1,21 @@
 .avatar {
-  background-color: lightcoral;
   border-radius: 20px;
   height: 10%;
   padding: 6px;
-  width: 1em;
+  width: 2em;
 }
 
 .header-score {
   align-items: center;
   display: flex;
+  display: inline;
+}
+
+.header-score-container {
+  background-color: rgb(245, 245, 245);
+  border-radius: 50px;
   padding: 10px 20px;
+  display: flex;
 }
 
 .header-name {
@@ -18,16 +24,17 @@
 
 .header-info {
   align-items: center;
+  background-color: rgb(245, 245, 245);
+  border-radius: 50px;
   display: flex;
-  padding: 10px 20px;
+  padding: 2px 20px 2px 3px;
 }
 
 .header-container {
   align-items: center;
-  background-color: lightgreen;
-  border: 1.5px solid black;
   display: flex;
   justify-content: space-between;
+  padding-top: 40px;
 }
 
 * {
