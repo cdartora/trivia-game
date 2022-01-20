@@ -1,16 +1,16 @@
 .game-menu-container {
   align-items: center;
-  display: flex;
-  justify-content: center;
-  margin-top: 80px;
-  padding: 0 30px 30px 30px;
-  text-align: center;
-  width: 50vw;
   background-color: white;
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
+  display: flex;
+  height: 71.6vh;
+  justify-content: center;
+  margin-top: 50px;
   max-width: 500px;
-  height: 68.5vh;
+  padding: 20px 30px 30px;
+  text-align: center;
+  width: 50vw;
 }
 
 .game-container {
@@ -18,3 +18,14 @@
   display: flex;
   justify-content: center;
 }
+
+@media ( max-width : 900px ) {
+
+  .game-menu-container {
+    height: 77vh;
+    margin-top: 4.2vh;
+    padding: 10px;
+    width: max(50vw, 300px);
+  }
+}
+
