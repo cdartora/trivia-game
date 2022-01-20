@@ -1,0 +1,58 @@
+.avatar {
+  border-radius: 20px;
+  height: 10%;
+  padding: 6px;
+  width: 2em;
+}
+
+.header-score {
+  align-items: center;
+  display: inline;
+}
+
+.header-score-container {
+  background-color: whitesmoke;
+  border-radius: 50px;
+  display: flex;
+  margin-top: 10px;
+  padding: 10px 20px;
+}
+
+.header-name {
+  margin-left: 10px;
+}
+
+.header-info {
+  align-items: center;
+  background-color: whitesmoke;
+  border-radius: 50px;
+  display: flex;
+  padding: 2px 20px 2px 3px;
+}
+
+.header-container {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding-top: 40px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+@media ( max-width : 900px ) {
+
+  .header-container {
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: 10px;
+  }
+
+  * {
+    font-size: max(2vw, 15px);
+  }
+}

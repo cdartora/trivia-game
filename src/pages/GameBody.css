@@ -1,0 +1,13 @@
+.gamebody-container {
+  background-image: linear-gradient(#f5615f, #efbd88);
+  height: 100vh;
+  padding: 0 calc(100vw - 70%);
+}
+
+@media ( max-width : 900px ) {
+
+  .gamebody-container {
+    padding: 0 5px;
+  }
+
+}
