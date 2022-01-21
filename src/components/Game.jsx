@@ -40,6 +40,7 @@ class Game extends Component {
   render() {
     const { questions } = this.props;
     const { questionNumber } = this.state;
+
     return (
       <div className="game-container">
         <div className="game-menu-container">

@@ -14,7 +14,7 @@ class Answers extends Component {
       timer: 30,
     };
 
-    this.saveRandomClassnames = this.saveRandomClassnames.bind(this);
+    this.saveRandomPositions = this.saveRandomPositions.bind(this);
     this.timerCounter = this.timerCounter.bind(this);
   }
 
@@ -38,6 +38,7 @@ class Answers extends Component {
   nextHandler = () => {
     const { nextQuestion } = this.props;
     nextQuestion();
+    this.countAnswers();
     this.setState({ timer: 30, isRunning: true });
     this.setTimer();
   };
@@ -95,18 +96,17 @@ class Answers extends Component {
   }
 
   countAnswers() {
-    const { wrong } = this.props;
+    const FIRST = 1;
+    const SECOND = 2;
+    const THIRD = 3;
+    const FORTH = 4;
 
-    const number = [];
+    const positions = [FIRST, SECOND, THIRD, FORTH];
 
-    for (let i = 0; i < wrong.length + 1; i += 1) {
-      number.push(i + 1);
-    }
-
-    this.saveRandomClassnames(number);
+    this.saveRandomPositions(positions);
   }
 
-  saveRandomClassnames(numbers) {
+  saveRandomPositions(numbers) {
     const classes = [];
 
     const originalLength = numbers.length;
@@ -120,8 +120,7 @@ class Answers extends Component {
 
   render() {
     const { correct, wrong } = this.props;
-    const { classes, isRunning, timer, correctAnswers } = this.state;
-    console.log(correctAnswers);
+    const { classes, isRunning, timer } = this.state;
     return (
       <div className="answers-container" data-testid="answer-options">
         <button
